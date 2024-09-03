@@ -5,16 +5,22 @@ const colorLapiz = document.getElementById("colorLapiz");
 const descargarBtn = document.getElementById("descargarBtn");
 const circuloBtn = document.getElementById("circulo")
 const context = pizarra.getContext("2d");
+const borrador = document.getElementById("borrador")
 
 
 let initialX;
 let initialY;
 let figura=0;
+let util='lapiz'
 const dibujar = (cursorX, cursorY) =>{
     context.beginPath();
     context.moveTo(initialX, initialY);
     context.lineWidth = grosorLapiz.value;
-    context.strokeStyle = colorLapiz.value;
+    if (util==='lapiz'){
+        context.strokeStyle = colorLapiz.value;
+    }else{
+        context.strokeStyle = 'white';
+    }
     context.lineCap = "round";
     context.lineJoin = "round";
     context.lineTo(cursorX, cursorY);
@@ -46,6 +52,16 @@ pizarra.addEventListener("mousedown", mouseDown);
 pizarra.addEventListener("mouseup", mouseUp);
 
 limpiarBtn.addEventListener("click", () => {context.clearRect(0, 0, pizarra.width, pizarra.height)});
+
+//Borrador 
+borrador.addEventListener("click", () => {
+    util='borrador';
+});
+
+colorLapiz.addEventListener("click", () => {
+    util='lapiz';
+});
+
 
 descargarBtn.addEventListener("click", () => {
     //Quitar fondo negro
