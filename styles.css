@@ -1,0 +1,35 @@
+canvas {
+    border: 2px double palevioletred;
+    background-color: white;
+    border-radius: 15px;
+}
+
+body {
+    background-color: #222222;
+    color: whitesmoke;
+    font-family: cursive;
+}
+
+article {
+    display: flex;
+    column-gap: 5%;
+}
+
+button {
+    background-color: palevioletred;
+    color: whitesmoke;
+    border-radius: 5px;
+    border-color: palevioletred;
+}
+
+button:hover{
+    box-shadow: 2px 2px rgb(216, 112, 147, 0.7);
+    background-color: rgb(216, 112, 147, 0.7);
+    border-color: rgb(216, 112, 147, 0.7);
+    cursor: pointer;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
