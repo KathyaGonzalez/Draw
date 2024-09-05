@@ -3,15 +3,18 @@ const limpiarBtn = document.getElementById("limpiar");
 const grosorLapiz = document.getElementById("grosorLapiz");
 const colorLapiz = document.getElementById("colorLapiz");
 const descargarBtn = document.getElementById("descargarBtn");
-const circuloBtn = document.getElementById("circulo")
 const context = pizarra.getContext("2d");
-const borrador = document.getElementById("borrador")
+const borrador = document.getElementById("borrador");
+const cuadradoBtn = document.getElementById('cuadrado');
+const lapizBtn = document.getElementById('lapiz');
+const circuloBtn = document.getElementById("circulo");
+
 
 
 let initialX;
 let initialY;
-let figura=0;
-let util='lapiz'
+let util='lapiz';
+let figura='garabatear';
 const dibujar = (cursorX, cursorY) =>{
     context.beginPath();
     context.moveTo(initialX, initialY);
@@ -21,10 +24,10 @@ const dibujar = (cursorX, cursorY) =>{
     }else{
         context.strokeStyle = 'white';
     }
-    context.lineCap = "round";
-    context.lineJoin = "round";
     context.lineTo(cursorX, cursorY);
     context.stroke();
+    context.lineCap = "round";
+    context.lineJoin = "round";
     initialX = cursorX;
     initialY = cursorY;
 }
@@ -32,16 +35,36 @@ const dibujar = (cursorX, cursorY) =>{
 const mouseDown = (event) => {
     initialX = event.offsetX;
     initialY = event.offsetY;
-    dibujar(initialX, initialY);
-    pizarra.addEventListener("mousemove", mouseMoving);
+    if(figura==='garabatear'){
+        dibujar(initialX, initialY);
+        pizarra.addEventListener("mousemove", mouseMoving);
+    }
 }
 
 const mouseMoving = (event) => {
-    dibujar(event.offsetX, event.offsetY);
+    if(figura==='garabatear'){
+        dibujar(event.offsetX, event.offsetY);
+    }
 }
 
-const mouseUp = () => {
-    pizarra.removeEventListener("mousemove", mouseMoving)
+const mouseUp = (event) => {
+    if(figura==='garabatear'){
+        pizarra.removeEventListener("mousemove", mouseMoving)
+    }else if (figura==='cuadrado'){
+        let ancho = Math.abs(initialX-event.offsetX);
+        let altura = Math.abs(initialY-event.offsetY);
+        context.beginPath();
+        context.moveTo(initialX, initialY);
+        context.lineWidth = grosorLapiz.value;
+        context.strokeStyle = colorLapiz.value;        
+        if(initialX>event.offsetX){
+            initialX=initialX-ancho;
+        }
+        if(initialY>event.offsetY){
+            initialY=initialY-altura;
+        }
+        context.strokeRect(initialX, initialY, ancho, altura);
+    }
 }
 
 /*colorLapiz.addEventListener("change", () => {
@@ -56,12 +79,23 @@ limpiarBtn.addEventListener("click", () => {context.clearRect(0, 0, pizarra.widt
 //Borrador 
 borrador.addEventListener("click", () => {
     util='borrador';
+    figura='garabatear';
 });
 
 colorLapiz.addEventListener("click", () => {
     util='lapiz';
 });
 
+//Dibujar cuadrado
+cuadradoBtn.addEventListener("click", () => {
+    figura = 'cuadrado';
+})
+
+//Dibujar con lapiz
+lapizBtn.addEventListener("click", () => {
+    figura = 'garabatear';
+    util = 'lapiz';
+})
 
 descargarBtn.addEventListener("click", () => {
     //Quitar fondo negro

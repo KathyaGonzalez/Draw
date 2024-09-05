@@ -10,9 +10,9 @@
     <h1>Draw in me</h1>
     <canvas id="pizarra" width= "500" height="500" ></canvas>
     <article>
-        <section>
-            <button id="limpiar">Limpiar</button>
-        </section>
+        <button id="limpiar">
+            Limpiar
+        </button>
         <section>
             <span>Grosor lapiz</span>
             <input type="range" min="5" max="50" value="25" id="grosorLapiz">
@@ -21,17 +21,21 @@
             <span>Color</span>
             <input type="color" value="black" id="colorLapiz">
         </section>
-        <section>
-            <button id="descargarBtn">Descargar lienzo</button>
-        </section>
-        <section>
-            <button id="borrador">
-                Borrador
-            </button>
-        </section>
-        <section>
-            <button id="circulo">O</button>
-        </section>
+        <button id="descargarBtn">
+            Descargar lienzo
+        </button>
+        <button id="lapiz">
+            ✏️
+        </button>
+        <button id="borrador">
+            ⬜
+        </button>
+        <button id="circulo">
+            🔘
+        </button>
+        <button id="cuadrado">
+            🟦
+        </button>
     </article>
     <script src="./index.js"></script>
 </body>

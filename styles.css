@@ -12,7 +12,7 @@ body {
 
 article {
     display: flex;
-    column-gap: 5%;
+    column-gap: 1%;
 }
 
 button {
